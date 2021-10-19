@@ -16,6 +16,24 @@
       "message": "LGTM on the JS side.",
       "revId": "920fafa773c0d4cba8c2f1ac9bae0c05049f20b0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8836ae61_c76035e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2021-10-19T09:16:59Z",
+      "side": 1,
+      "message": "Appreciate the eye, Dhruv!",
+      "parentUuid": "add19693_4abc30c0",
+      "revId": "920fafa773c0d4cba8c2f1ac9bae0c05049f20b0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
