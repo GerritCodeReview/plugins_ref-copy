@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import './ref-copy';
+import {REF_COPY} from './ref-copy';
 
 Gerrit.install(plugin => {
   plugin.registerCustomComponent(
-      'change-metadata-item', 'ref-copy');
+      'change-metadata-item', REF_COPY);
 });

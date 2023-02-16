@@ -12,40 +12,71 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {htmlTemplate} from './ref-copy_html';
+import {css, html, LitElement} from 'lit';
 
 const COPY_TIMEOUT_MS = 1000;
 
-class RefCopy extends Polymer.Element {
-
-  static get is() { return 'ref-copy'; }
-
-  static get template() { return htmlTemplate; }
-
+export const REF_COPY = 'ref-copy';
+class RefCopy extends LitElement {
   static get properties() {
     return {
-      revision: Object,
+      revision: {type: Object}
     };
+  }
+
+  static get styles() {
+    return css`
+    .text {
+      min-width: 8em;
+      padding: var(--spacing-l);
+      text-transform: none;
+    }
+    `;
+  }
+
+  render() {
+    return html`
+    <div class="text">
+      <iron-input
+          bind-value="${this.revision.ref}"
+          readonly>
+        <input
+            id="input"
+            is="iron-input"
+            type="text"
+            @click="${this._handleInputTap}"
+            readonly/>
+      </iron-input>
+      <gr-button
+        id="button"
+        link
+        class="copyToClipboard"
+        @click="${this._copyToClipboard}">
+        copy
+      </gr-button>
+    </div>`;
   }
 
   _handleInputTap(e) {
     e.preventDefault();
-    Polymer.dom(e).rootTarget.select();
+    const rootTarget = e.composedPath()[0];
+    rootTarget.select();
   }
 
   _copyToClipboard(e) {
-    const ref = this.$.input.value;
+    const ref = this.revision.ref;
     const copyBtn = e.target;
     if (ref) {
       navigator.clipboard.writeText(ref).then(() => {
         copyBtn.innerText = 'done';
         setTimeout(() => {
-          copyBtn.innerText = 'copy'}, COPY_TIMEOUT_MS);
-        }).catch(err => {
-          console.log('Failed to copy ref to clipboard', err);
-        })
+          copyBtn.innerText = 'copy'
+        }, COPY_TIMEOUT_MS);
+      }).catch(err => {
+        console.log('Failed to copy ref to clipboard', err);
+      })
     }
   }
 }
 
-customElements.define(RefCopy.is, RefCopy);
+customElements.define(REF_COPY, RefCopy);
