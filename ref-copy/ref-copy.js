@@ -37,16 +37,12 @@ class RefCopy extends LitElement {
   render() {
     return html`
     <div class="text">
-      <iron-input
-          bind-value="${this.revision.ref}"
-          readonly>
-        <input
-            id="input"
-            is="iron-input"
-            type="text"
-            @click="${this._handleInputTap}"
-            readonly/>
-      </iron-input>
+      <input
+          id="input"
+          type="text"
+          .value="${this.revision.ref}"
+          @click="${this._handleInputTap}"
+          readonly/>
       <gr-button
         id="button"
         link
