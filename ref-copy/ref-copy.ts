@@ -13,60 +13,62 @@
 // limitations under the License.
 
 import {css, html, LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+import {RevisionInfo} from '@gerritcodereview/typescript-api/rest-api';
 
 const COPY_TIMEOUT_MS = 1000;
 
-export const REF_COPY = 'ref-copy';
-class RefCopy extends LitElement {
-  static get properties() {
-    return {
-      revision: {type: Object}
-    };
+@customElement('ref-copy')
+export class RefCopy extends LitElement {
+  @property({type: Object})
+  revision!: RevisionInfo;
+
+  static override get styles() {
+    return [
+      css`
+        .text {
+          min-width: 8em;
+          padding: var(--spacing-l);
+          text-transform: none;
+        }
+      `
+    ];
   }
 
-  static get styles() {
-    return css`
-    .text {
-      min-width: 8em;
-      padding: var(--spacing-l);
-      text-transform: none;
-    }
-    `;
-  }
-
-  render() {
+  override render() {
     return html`
-    <div class="text">
-      <input
+      <div class="text">
+        <input
           id="input"
           type="text"
           .value="${this.revision.ref}"
-          @click="${this._handleInputTap}"
-          readonly/>
-      <gr-button
-        id="button"
-        link
-        class="copyToClipboard"
-        @click="${this._copyToClipboard}">
-        copy
-      </gr-button>
-    </div>`;
+          @click=${(e: InputEvent) => this.handleInputTap(e)}
+          readonly
+        />
+        <gr-button
+          id="button"
+          link
+          class="copyToClipboard"
+          @click=${(e: Event) => this.copyToClipboard(e)}>
+          copy
+        </gr-button>
+      </div>`;
   }
 
-  _handleInputTap(e) {
+  private handleInputTap(e: InputEvent) {
     e.preventDefault();
-    const rootTarget = e.composedPath()[0];
+    const rootTarget = e.composedPath()[0] as HTMLInputElement;
     rootTarget.select();
   }
 
-  _copyToClipboard(e) {
+  private copyToClipboard(e: Event) {
     const ref = this.revision.ref;
-    const copyBtn = e.target;
+    const copyBtn = e.target as HTMLButtonElement;
     if (ref) {
       navigator.clipboard.writeText(ref).then(() => {
-        copyBtn.innerText = 'done';
+        copyBtn!.innerText = 'done';
         setTimeout(() => {
-          copyBtn.innerText = 'copy'
+          copyBtn!.innerText = 'copy'
         }, COPY_TIMEOUT_MS);
       }).catch(err => {
         console.log('Failed to copy ref to clipboard', err);
@@ -74,5 +76,3 @@ class RefCopy extends LitElement {
     }
   }
 }
-
-customElements.define(REF_COPY, RefCopy);
