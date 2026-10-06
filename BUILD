@@ -1,5 +1,4 @@
 load("//tools/bzl:plugin.bzl", "gerrit_plugin")
-load("//tools/bzl:js.bzl", "gerrit_js_bundle")
 
 gerrit_plugin(
     name = "ref-copy",
@@ -10,11 +9,5 @@ gerrit_plugin(
         "Implementation-Title: Ref Copy Plugin",
     ],
     resources = glob(["src/main/**/*"]),
-    resource_jars = [":ref-copy-ui"],
-)
-
-gerrit_js_bundle(
-    name = "ref-copy-ui",
-    srcs = glob(["ref-copy/*.js"]),
-    entry_point = "ref-copy/plugin.js",
+    resource_jars = ["//plugins/ref-copy/ref-copy:ref-copy-ui"],
 )
