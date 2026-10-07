@@ -34,6 +34,23 @@
       "parentUuid": "2fe6c8ab_03f307ac",
       "revId": "430545c45034f48cb4aaa146ad09a4144ee8d238",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb946146_8bd3d482",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2026-10-07T12:00:30Z",
+      "side": 1,
+      "message": "stable-3.14 and stable-3.13 have been branched using 7376038c8201c4665766e1db44ff5a22c01c55c3.",
+      "revId": "430545c45034f48cb4aaa146ad09a4144ee8d238",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
